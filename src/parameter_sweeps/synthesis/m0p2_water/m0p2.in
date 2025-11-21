@@ -1,0 +1,15 @@
+# Host star parameters
+sName star
+saModules stellar
+
+dMass 0.4e30
+dAge 5e7
+
+# STELLAR Parameters
+sStellarModel baraffe
+bHaltEndBaraffeGrid 1 # Ends the simulation when the grid edge is reached.
+dSatXUVTime 1e9 # Jackson et al. (2012).
+dXUVBeta 1.182 # Ribas et al. (2005).
+dSatXUVFrac 2.624e-3 # Saturation level of the XUV luminosity.
+
+saOutputOrder Time Age -Luminosity -LXUVStellar -Radius Temperature LXUVFrac

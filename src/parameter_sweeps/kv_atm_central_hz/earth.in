@@ -1,0 +1,54 @@
+# energy-limited
+sName earth # Body's name
+saModules thermint radheat atmesc # Active modules
+
+# Physical parameters
+sPlanetRadiusModel PROXCENB # Mass-radius model
+dAge 5e7 # Age [yr]
+dMass -1.0
+dRadius -1.0
+dRotPeriod -1.0
+dEcc 0.0
+
+# From Koparapapu
+dSemi 0.9061
+
+# From Kane et al.
+# dSemi -0.931 # Semi major axis [AU]
+
+# ThermInt inputs
+dTMan -1.0
+dTCore -1.0
+dEruptEff 0.0
+
+# ATMESC Parameters
+dXFrac 1.0 # X-Ray/XUV absorption radius in planet radii
+dAtmXAbsEffH 0.1 # H X-ray/XUV absorption efficiency (epsilon)
+dSurfWaterMass 0.0 # Initial water mass, negative -> Earth oceans
+dEnvelopeMass 5.15e20 # Initial H envelope mass. 10 present day Earth atmospheres.
+bStopWaterLossInHZ 0
+bInstantO2Sink 0 # Is Oxygen instantly absorbed by the surface?
+bHaltSurfaceDesiccated 0 # Halt when dry?
+bHaltEnvelopeGone 0 # Halt when H enevlope evaporated?
+sWaterLossModel lbexact # Luger & Barnes (2015) model
+dMinSurfWaterMass -1.e-5  # Planet is desiccated when water content drops below this (Earth oceans)
+dJeansTime -12.0 # Time when flow transitions to ballistic escape (Gyr)
+bUseEnergyLimited 1 # Is the flow energy-limited?
+bUseRRLimited 0 # Is the flow radiation/recombination-limited?
+bUseBondiLimited 0 # Is the flow Bondi-limited?
+bAtmEscAuto 0 # Should atmesc decide the escape regime?
+
+# Output options
+saOutputOrder Time $
+        -MagMom $
+        40KNumCore $
+        235UNumMan $
+        238UNumMan $
+        232ThNumMan $
+        -TCore $
+        -TLMan $
+        -TCMB $
+        EnvelopeMass $
+        -DEnvMassDt $
+        -SurfWaterMass $
+        -Radius

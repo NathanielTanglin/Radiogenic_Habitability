@@ -1,0 +1,15 @@
+# Host star parameters
+sName star
+saModules stellar
+
+dMass 2.4e30 # Median mass of KV stellar host from NASA exoplanet catalog [kg].
+dAge 5e7
+
+# STELLAR Parameters
+sStellarModel baraffe
+bHaltEndBaraffeGrid 0 # Ends the simulation when the grid edge is reached.
+dSatXUVTime 0 # Jackson et al. (2012).
+dXUVBeta 1.25 # Ribas et al. (2005).
+dSatXUVFrac 0.5012e-4 # Saturation level of the XUV luminosity.
+
+saOutputOrder Time Age -Luminosity -LXUVStellar -Radius Temperature LXUVFrac

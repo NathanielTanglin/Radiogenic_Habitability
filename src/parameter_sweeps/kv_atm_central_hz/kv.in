@@ -1,0 +1,22 @@
+# Host star parameters
+sName kv
+saModules stellar
+
+# Chosen as HD22049 from Table 1 of https://academic.oup.com/mnras/article/441/3/2361/1127607
+# K dwarf
+# Mass = 0.86 Msun
+# B = 8.76 Gauss at age = 0.4 Gyr
+
+dMass 1.71e30 # Median mass of KV stellar host from NASA exoplanet catalog [kg]. (0.86 solar masses)
+dAge 5e7
+
+# STELLAR Parameters
+sStellarModel baraffe
+sMagBrakingModel matt
+bHaltEndBaraffeGrid 1 # Ends the simulation when the grid edge is reached.
+dSatXUVTime 1e9 # Jackson et al. (2012).
+dXUVBeta 1.23 # Ribas et al. (2005).
+dSatXUVFrac 1.e-3 # Saturation level of the XUV luminosity.
+dSurfMagField 0.000876 # Tesla (8.76 Gauss)
+
+saOutputOrder Time Age -Luminosity -LXUVStellar -Radius Temperature LXUVFrac
