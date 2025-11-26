@@ -141,6 +141,8 @@ def build_contour_VPLanet(save_name = '', directory = 'Parameter_Sweep', planet_
 
         time = planet_dynamics['Time']
 
+        # Cuts off the mass loss at 6.025 Gyr.
+
         if (mode & DESSIC_TIME):
             # Gets the first time snap shot where the mass is gone (equal to zero).
             metric = round(time[mass == 0.0].iloc[0] / 1e9, 2)

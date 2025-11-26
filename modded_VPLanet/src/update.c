@@ -187,6 +187,8 @@ void InitializeUpdate(BODY *body, CONTROL *control, MODULE *module,
     update[iBody].iNumAngMY            = 0;
     update[iBody].iNumAngMZ            = 0;
 
+    //update[iBody].iNumSurfMagField     = 0;
+
     update[iBody].iNumPositionX = 0;
     update[iBody].iNumPositionY = 0;
     update[iBody].iNumPositionZ = 0;
@@ -3353,6 +3355,59 @@ void InitializeUpdate(BODY *body, CONTROL *control, MODULE *module,
       iVar++;
     }
 
+    // Set to -1 to initialize; this is changed if the user requests it
+    /*update[iBody].iSurfMagField = -1;
+    if (update[iBody].iNumSurfMagField) {
+      // At least 1 module will use this variable
+
+      // Assign iVar accounting variables
+      update[iBody].iSurfMagField = iVar;
+      update[iBody].iaVar[iVar]      = VSURFMAGFIELD;
+      update[iBody].iNumEqns[iVar]   = update[iBody].iNumSurfMagField;
+      // Assign pointer to derivative
+      update[iBody].pdVar[iVar]      = &body[iBody].dSurfMagField;
+      // Allocate memory
+      update[iBody].iNumBodies[iVar] =
+            malloc(update[iBody].iNumSurfMagField * sizeof(int));
+      update[iBody].iaBody[iVar] =
+            malloc(update[iBody].iNumSurfMagField * sizeof(int *));
+      update[iBody].iaType[iVar] = malloc(update[iBody].iNumSurfMagField *
+            sizeof(int));
+      update[iBody].iaModule[iVar] =
+            malloc(update[iBody].iNumSurfMagField * sizeof(int));
+
+      // Assign and alloate memory for Runge-Kutta integration
+      if (control->Evolve.iOneStep == RUNGEKUTTA) {
+          control->Evolve.tmpUpdate[iBody].pdVar[iVar] =
+          &control->Evolve.tmpBody[iBody].dSurfMagField;
+          control->Evolve.tmpUpdate[iBody].iNumBodies[iVar] =
+          malloc(update[iBody].iNumSurfMagField * sizeof(int));
+          control->Evolve.tmpUpdate[iBody].daDerivProc[iVar] =
+          malloc(update[iBody].iNumSurfMagField * sizeof(double));
+          control->Evolve.tmpUpdate[iBody].iaType[iVar] =
+          malloc(update[iBody].iNumSurfMagField * sizeof(int));
+          control->Evolve.tmpUpdate[iBody].iaModule[iVar] =
+          malloc(update[iBody].iNumSurfMagField * sizeof(int));
+          control->Evolve.tmpUpdate[iBody].iaBody[iVar] =
+          malloc(update[iBody].iNumSurfMagField * sizeof(int *));
+          
+          for (iSubStep=0; iSubStep < 4; iSubStep++) {
+              control->Evolve.daDerivProc[iSubStep][iBody][iVar] = malloc(update[iBody].iNumEqns[iVar] * sizeof(double));
+          }
+      }
+
+      // Now allocate memory for the number of processes that affect this variable
+      iEqn = 0;
+      for (iModule = 0; iModule < module->iNumModules[iBody]; iModule++) {
+            module->fnFinalizeUpdateSurfMagField[iBody][iModule](body, update,
+                  &iEqn, iVar, iBody, iFoo);
+      }
+
+      (*fnUpdate)[iBody][iVar]        = malloc(iEqn * sizeof(fnUpdateVariable));
+      update[iBody].daDerivProc[iVar] = malloc(iEqn * sizeof(double));
+      iVar++; // increment iVar for the next primary variable
+    }*/
+
     /* Lost Angular Momentum */
     update[iBody].iLostAngMom = -1;
     if (update[iBody].iNumLostAngMom) {
@@ -3383,8 +3438,7 @@ void InitializeUpdate(BODY *body, CONTROL *control, MODULE *module,
         control->Evolve.tmpUpdate[iBody].iaBody[iVar] =
               malloc(update[iBody].iNumLostAngMom * sizeof(int *));
         for (iSubStep=0; iSubStep < 4; iSubStep++) {
-            control->Evolve.daDerivProc[iSubStep][iBody][iVar] =
-                  malloc(update[iBody].iNumEqns[iVar] * sizeof(double));
+              control->Evolve.daDerivProc[iSubStep][iBody][iVar] = malloc(update[iBody].iNumEqns[iVar] * sizeof(double));
         }
       }
 

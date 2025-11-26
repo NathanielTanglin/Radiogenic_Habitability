@@ -204,6 +204,8 @@ double fdDEDtRotBrakeStellar(BODY *, SYSTEM *, int *);
 double fdDEDtStellar(BODY *, SYSTEM *, int *);
 double fdCranmerSaar2011TauCZ(double);
 
+double fdDSurfMagFieldDt(BODY *, SYSTEM *, int *);
+
 /* Dummy functions */
 double fdSurfEnFluxStellar(BODY *, SYSTEM *, UPDATE *, int, int);
 

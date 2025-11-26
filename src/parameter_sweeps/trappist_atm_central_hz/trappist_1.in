@@ -7,6 +7,7 @@ saModules stellar # Active modules
 
 # Physical properties
 dMass 0.17874558234e30 # = 0.08986706 Msun
+dRadius 
 dRotPeriod -1.0 # Rotation period, negative -> days
 dAge 1.0e6 # Initial age [yr]
 dSurfMagField 0.1 # Tesla (1 kGauss)

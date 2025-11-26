@@ -1623,6 +1623,12 @@ struct UPDATE {
   int iNumLostEng; /**< Number of Equations Affecting lost angular momentum [1]
                     */
 
+  int iSurfMagField;
+  int iNumSurfMagField;
+  int iSurfMagFieldStellar;
+  double dSurfMagField;
+  double *pdDSurfMagFieldDtStellar;
+
   /*! Points to the element in UPDATE's daDerivProc matrix that contains the
       function that returns these variables due to STELLAR evolution. */
   double *pdLuminosityStellar;
@@ -2159,6 +2165,9 @@ typedef void (*fnFinalizeUpdateCO2MassMOAtmModule)(BODY *, UPDATE *, int *, int,
                                                    int, int);
 typedef void (*fnFinalizeUpdateCO2MassSolModule)(BODY *, UPDATE *, int *, int,
                                                  int, int);
+// Modded
+typedef void (*fnFinalizeUpdateSurfMagFieldModule)(BODY *, UPDATE *,
+              int *, int, int, int);
 
 typedef void (*fnReadOptionsModule)(BODY *, CONTROL *, FILES *, OPTIONS *,
                                     SYSTEM *, fnReadOption *, int);
@@ -2353,6 +2362,8 @@ struct MODULE {
   fnFinalizeUpdateCO2MassMOAtmModule **fnFinalizeUpdateCO2MassMOAtm;
   fnFinalizeUpdateCO2MassSolModule **fnFinalizeUpdateCO2MassSol;
 
+  fnFinalizeUpdateSurfMagFieldModule **fnFinalizeUpdateSurfMagField;
+  
   /*! These functions log module-specific data. */
   fnLogBodyModule **fnLogBody;
 

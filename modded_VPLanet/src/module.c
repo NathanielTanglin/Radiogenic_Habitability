@@ -271,6 +271,8 @@ void InitializeModule(BODY *body, CONTROL *control, MODULE *module) {
         malloc(iNumBodies * sizeof(fnManageModuleDerivatives *));
   module->fnVerifyHalt = malloc(iNumBodies * sizeof(fnVerifyHaltModule *));
 
+  //module->fnFinalizeUpdateSurfMagField = malloc(iNumBodies * sizeof(fnFinalizeUpdateSurfMagFieldModule));
+
   /* Assume no modules per body to start */
   for (iBody = 0; iBody < iNumBodies; iBody++) {
     module->iNumModules[iBody]      = 0;
@@ -501,6 +503,9 @@ void FinalizeModule(BODY *body, CONTROL *control, MODULE *module, int iBody) {
   module->fnFinalizeUpdateCO2MassSol[iBody] =
         malloc(iNumModules * sizeof(fnFinalizeUpdateCO2MassSolModule));
 
+  // Modded
+  //module->fnFinalizeUpdateSurfMagField[iBody] = malloc(iNumModules * sizeof(fnFinalizeUpdateSurfMagFieldModule));
+
   for (iModule = 0; iModule < (iNumModules); iModule++) {
     /* Initialize all module functions pointers to point to their respective
        NULL function. The modules that need actual function will replace them
@@ -590,6 +595,8 @@ void FinalizeModule(BODY *body, CONTROL *control, MODULE *module, int iBody) {
           &FinalizeUpdateNULL;
     module->fnFinalizeUpdateCO2MassMOAtm[iBody][iModule] = &FinalizeUpdateNULL;
     module->fnFinalizeUpdateCO2MassSol[iBody][iModule]   = &FinalizeUpdateNULL;
+
+    // module->fnFinalizeUpdateSurfMagField[iBody][iModule]   = &FinalizeUpdateNULL;
   }
 }
 

@@ -1,4 +1,4 @@
-Metadata-Version: 2.1
+Metadata-Version: 2.4
 Name: vplanet
 Version: 2.5.31
 Summary: The virtual planet simulator
@@ -9,6 +9,24 @@ License: MIT
 Requires-Python: >=3.6
 Description-Content-Type: text/markdown
 License-File: LICENSE
+Requires-Dist: vplot>=1.0.5
+Requires-Dist: vspace>=2.3.2
+Requires-Dist: bigplanet>=3.0.1
+Requires-Dist: multiplanet>=2.0.3
+Requires-Dist: astropy>=3.0
+Requires-Dist: numpy
+Requires-Dist: tqdm
+Requires-Dist: seaborn
+Dynamic: author
+Dynamic: author-email
+Dynamic: description
+Dynamic: description-content-type
+Dynamic: home-page
+Dynamic: license
+Dynamic: license-file
+Dynamic: requires-dist
+Dynamic: requires-python
+Dynamic: summary
 
 <p align="center">
   <img width = "250" src="docs/VPLanetLogo.png?raw=true"/>

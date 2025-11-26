@@ -1,5 +1,4 @@
 .clang-format
-.gitignore
 .pre-commit-config.yaml
 LICENSE
 MANIFEST.in
@@ -8,19 +7,9 @@ README.md
 VERSION
 environment.yml
 setup.py
-.github/pull_request_template.md
-.github/workflows/docs.yml
-.github/workflows/examples.yml
-.github/workflows/floatingpoint.yml
-.github/workflows/memcheck.yml
-.github/workflows/pip-install.yml
-.github/workflows/sanitizer.yml
-.github/workflows/tests-linux.yml
-.github/workflows/tests-macos-intel.yml
-.github/workflows/tests-macos-silicon.yml
 Manual/README.rst
 Manual/VPLanet1.0.pdf
-bin/.gitignore
+dist/vplanet-2.5.31-py3.11-linux-x86_64.egg
 docs/BigPlanetExample.png
 docs/Makefile
 docs/README.md
@@ -84,8 +73,6 @@ examples/AbioticO2/.gitignore
 examples/AbioticO2/AbioticO2.png
 examples/AbioticO2/README.rst
 examples/AbioticO2/makeplot.py
-examples/AbioticO2/star.in
-examples/AbioticO2/vpl.in
 examples/ApseLock/.gitignore
 examples/ApseLock/ApseLock.png
 examples/ApseLock/README.rst
@@ -119,6 +106,12 @@ examples/AtmEscRegimes/Bondi/bondi.in
 examples/AtmEscRegimes/Bondi/rad.in
 examples/AtmEscRegimes/Bondi/star.in
 examples/AtmEscRegimes/Bondi/vpl.in
+examples/AtmEscRegimes/Regimes/AtmEscRegimes.auto.forward
+examples/AtmEscRegimes/Regimes/AtmEscRegimes.bondi.forward
+examples/AtmEscRegimes/Regimes/AtmEscRegimes.el.forward
+examples/AtmEscRegimes/Regimes/AtmEscRegimes.log
+examples/AtmEscRegimes/Regimes/AtmEscRegimes.rad.forward
+examples/AtmEscRegimes/Regimes/AtmEscRegimes.rr.forward
 examples/AtmEscRegimes/Regimes/auto.in
 examples/AtmEscRegimes/Regimes/bondi.in
 examples/AtmEscRegimes/Regimes/el.in
@@ -460,8 +453,6 @@ examples/StellarEvol/.gitignore
 examples/StellarEvol/README.rst
 examples/StellarEvol/StellarEvol.png
 examples/StellarEvol/makeplot.py
-examples/StellarEvol/M1.3/a.in
-examples/StellarEvol/M1.3/vpl.in
 examples/TidalEarth/README.rst
 examples/TidalEarth/TidalEarth1.png
 examples/TidalEarth/TidalEarth2.png
@@ -515,6 +506,7 @@ examples/WaterLossTides/WaterCPL/vpl.in
 examples/WaterLossTides/WaterCTL/b.in
 examples/WaterLossTides/WaterCTL/star.in
 examples/WaterLossTides/WaterCTL/vpl.in
+examples/__pycache__/get_args.cpython-39.pyc
 src/atmesc.c
 src/atmesc.h
 src/binary.c
@@ -894,6 +886,9 @@ vplanet/logger.py
 vplanet/output.py
 vplanet/quantity.py
 vplanet/quantity_support.py
+vplanet/vplanet_core.cp311-win_amd64.pyd
+vplanet/vplanet_core.cpython-311-x86_64-linux-gnu.so
+vplanet/vplanet_core.cpython-39-x86_64-linux-gnu.so
 vplanet/vplanet_help.py
 vplanet/wrapper.py
 vplanet.egg-info/PKG-INFO
@@ -903,3 +898,11 @@ vplanet.egg-info/entry_points.txt
 vplanet.egg-info/not-zip-safe
 vplanet.egg-info/requires.txt
 vplanet.egg-info/top_level.txt
+vplanet/__pycache__/__init__.cpython-311.pyc
+vplanet/__pycache__/custom_units.cpython-311.pyc
+vplanet/__pycache__/log.cpython-311.pyc
+vplanet/__pycache__/logger.cpython-311.pyc
+vplanet/__pycache__/output.cpython-311.pyc
+vplanet/__pycache__/quantity.cpython-311.pyc
+vplanet/__pycache__/vplanet_help.cpython-311.pyc
+vplanet/__pycache__/wrapper.cpython-311.pyc

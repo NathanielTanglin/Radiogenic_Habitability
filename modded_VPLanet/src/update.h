@@ -64,6 +64,7 @@
 #define VTEMPERATURE 1503 // Temperature
 #define VLOSTANGMOM 1504  // Lost Angular Momentum
 #define VLOSTENG 1505     // Lost Energy
+#define VSURFMAGFIELD 1506
 
 // POISE
 #define VICEMASS 1851 // Ice Mass

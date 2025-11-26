@@ -9,7 +9,12 @@ dMass -1.0
 dRadius -1.0
 dRotPeriod -1.0
 dEcc 0.0
-dSemi -0.931 # Semi major axis [AU]
+
+# From Koparapapu
+dSemi 0.9061
+
+# From Kane et al.
+# dSemi -0.931 # Semi major axis [AU]
 
 # ThermInt inputs
 dTMan -1.0

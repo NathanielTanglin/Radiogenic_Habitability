@@ -1767,8 +1767,10 @@ void fnPropsAuxAtmEsc(BODY *body, EVOLVE *evolve, IO *io, UPDATE *update,
   double planetRadius = body[iBody].dRadius; // SI
   double planetMagMom = body[iBody].dMagMom; // SI
   double planetB = (4.0*PI*EPSILON_0*3.0*planetMagMom)/(2.0*pow(planetRadius, 3.0)); // SI
-  double stellarB = body[0].dSurfMagField; // 0.0001 // Tesla - SI
-  // 0.15; //(1.5*1e3) * 1e-4; //1e-4; // Tesla - SI
+  double stellarB = body[0].dSurfMagField;
+
+  //fprintf(stderr, "Stellar Radius: %3.5f\n", body[0].dRadius);
+  //fprintf(stderr, "Surface Magnetic Field: %3.5f\n", body[0].dSurfMagField);
 
   double beta = min((stellarB/planetB)*pow(stellarRadius/semiMajorAxis, 3.0), 1.0);
 

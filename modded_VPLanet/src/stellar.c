@@ -42,6 +42,7 @@ void BodyCopyStellar(BODY *dest, BODY *src, int foo, int iNumBodies,
   dest[iBody].dLuminosityAmplitude = src[iBody].dLuminosityAmplitude;
   dest[iBody].dLuminosityFrequency = src[iBody].dLuminosityFrequency;
   dest[iBody].dLuminosityPhase     = src[iBody].dLuminosityPhase;
+  dest[iBody].dSurfMagField        = src[iBody].dSurfMagField;
 }
 
 /**************** STELLAR options ********************/
@@ -1076,6 +1077,8 @@ void AssignStellarDerivatives(BODY *body, EVOLVE *evolve, UPDATE *update,
           &fdRadGyra; // NOTE: This points to the value of the Radius of
                       // Gyration!
   }
+
+  //fnUpdate[iBody][update[iBody].iSurfMagField][update[iBody].iSurfMagFieldStellar] = &fdDSurfMagFieldDtStellar;
 }
 
 void NullStellarDerivatives(BODY *body, EVOLVE *evolve, UPDATE *update,
@@ -1099,6 +1102,8 @@ void NullStellarDerivatives(BODY *body, EVOLVE *evolve, UPDATE *update,
           &fndUpdateFunctionTiny; // NOTE: This points to the value of the
                                   // Radius of Gyration!
   }
+
+  //fnUpdate[iBody][update[iBody].iSurfMagField] = [update[iBody].iSurfMagFieldStellar] = &fndUpdateFunctionTiny;
 }
 
 void VerifyStellar(BODY *body, CONTROL *control, FILES *files, OPTIONS *options,
@@ -1213,12 +1218,25 @@ void InitializeUpdateStellar(BODY *body, UPDATE *update, int iBody) {
     }
     update[iBody].iNumTemperature++;
   }
+
+  /*if (update[iBody].iNumSurfMagField == 0) {
+    update[iBody].iNumVars++;
+  }
+  update[iBody].iNumSurfMagField++;*/
 }
 
 void FinalizeUpdateEccStellar(BODY *body, UPDATE *update, int *iEqn, int iVar,
                               int iBody, int iFoo) {
   /* Nothing */
 }
+
+/*void FinalizeUpdateSurfMagFieldStellar(BODY *body, UPDATE *update,
+                                         int *iEqn, int iVar,int iBody,
+                                         int iFoo) {
+  update[iBody].iaModule[iVar][*iEqn] = STELLAR;
+  update[iBody].iSurfMagFieldStellar = *iEqn;
+  (*iEqn)++;
+}*/
 
 void FinalizeUpdateLuminosityStellar(BODY *body, UPDATE *update, int *iEqn,
                                      int iVar, int iBody, int iFoo) {
@@ -1516,6 +1534,8 @@ void AddModuleStellar(CONTROL *control, MODULE *module, int iBody,
   module->fnAssignDerivatives[iBody][iModule] = &AssignStellarDerivatives;
   module->fnNullDerivatives[iBody][iModule]   = &NullStellarDerivatives;
   module->fnVerifyHalt[iBody][iModule]        = &VerifyHaltStellar;
+
+  //module->fnFinalizeUpdateSurfMagField[iBody][iModule] = &FinalizeUpdateSurfMagFieldStellar;
 
   module->fnInitializeUpdate[iBody][iModule] = &InitializeUpdateStellar;
   module->fnFinalizeUpdateLuminosity[iBody][iModule] =
