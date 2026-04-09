@@ -25,7 +25,7 @@ dEruptEff 0.0
 dXFrac 1.0 # X-Ray/XUV absorption radius in planet radii
 dAtmXAbsEffH 0.1 # H X-ray/XUV absorption efficiency (epsilon)
 dSurfWaterMass 0.0 # Initial water mass, negative -> Earth oceans
-dEnvelopeMass 5.15e20 # Initial H envelope mass. 10 present day Earth atmospheres.
+dEnvelopeMass 5.15e20 # Initial H envelope mass. 100 present day Earth atmospheres.
 bStopWaterLossInHZ 0
 bInstantO2Sink 0 # Is Oxygen instantly absorbed by the surface?
 bHaltSurfaceDesiccated 0 # Halt when dry?
