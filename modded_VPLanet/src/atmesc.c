@@ -1757,31 +1757,26 @@ void fnPropsAuxAtmEsc(BODY *body, EVOLVE *evolve, IO *io, UPDATE *update,
     body[iBody].dAtmXAbsEffH2O = fdXUVEfficiencyBolmont2016(body[iBody].dFXUV);
   }
 
-  //double G = 6.674 * pow(10.0, -11); // SI base units.
-  double EPSILON_0 = 8.82 * pow(10.0, -12); // C^2 kg^-1 m^-3 s^2 (SI base units)
-  double EARTH_MAGNETIC_MOMENT = 7.94 * pow(10.0, 22); // A m^2 (SI base units). From https://modern-physics.org/earths-dipole-moment/
-  double AU_TO_METER = 149597870691.0; // SI base units.
+  const double MU_0 = 1.256637 * pow(10.0, -6.0); // In SI
 
-  double semiMajorAxis = body[iBody].dSemi; // SI
+  // Stellar parameters.
   double stellarRadius = body[0].dRadius; // SI
+  double stellarB = body[0].dSurfMagField; // SI
+
+  // Planetary parameters.
+  double semiMajorAxis = body[iBody].dSemi; // SI
   double planetRadius = body[iBody].dRadius; // SI
   double planetMagMom = body[iBody].dMagMom; // SI
-  double planetB = (4.0*PI*EPSILON_0*3.0*planetMagMom)/(2.0*pow(planetRadius, 3.0)); // SI
-  double stellarB = body[0].dSurfMagField;
-
-  //fprintf(stderr, "Stellar Radius: %3.5f\n", body[0].dRadius);
-  //fprintf(stderr, "Surface Magnetic Field: %3.5f\n", body[0].dSurfMagField);
+  double planetB = (MU_0*planetMagMom) / (4.0*PI*pow(planetRadius, 3.0)); // SI
 
   double beta = min((stellarB/planetB)*pow(stellarRadius/semiMajorAxis, 3.0), 1.0);
-
-  // Currently resulting in very high mass loss rates.
   double F_AP = 1.0 - pow(1.0 - (3.0*pow(beta, 1.0/3.0))/(2.0+beta), 0.5);
 
   // Reference hydrogen flux for the water loss
   // LS2016 uses reference equation 6 in paper. 1.00784 factor changes ATOMMASS
   // to mass of H (MTG)
   if (body[iBody].iWaterLossModel == ATMESC_LS2016) {
-    
+
     body[iBody].dFHRef = F_AP * (body[iBody].dAtmXAbsEffH2O * body[iBody].dFXUV *
                           body[iBody].dRadius) /
                          (4 * BIGG * body[iBody].dMass * PROTONMASS);
