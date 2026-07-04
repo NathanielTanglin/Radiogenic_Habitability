@@ -515,6 +515,7 @@ src/body.c
 src/body.h
 src/control.c
 src/control.h
+src/debug.txt
 src/distorb.c
 src/distorb.h
 src/distrot.c
@@ -888,6 +889,9 @@ vplanet/quantity.py
 vplanet/quantity_support.py
 vplanet/vplanet_core.cp311-win_amd64.pyd
 vplanet/vplanet_core.cpython-311-x86_64-linux-gnu.so
+vplanet/vplanet_core.cpython-314-x86_64-linux-gnu.so
+vplanet/vplanet_core.cpython-36m-x86_64-linux-gnu.so
+vplanet/vplanet_core.cpython-38-x86_64-linux-gnu.so
 vplanet/vplanet_core.cpython-39-x86_64-linux-gnu.so
 vplanet/vplanet_help.py
 vplanet/wrapper.py
@@ -899,10 +903,17 @@ vplanet.egg-info/not-zip-safe
 vplanet.egg-info/requires.txt
 vplanet.egg-info/top_level.txt
 vplanet/__pycache__/__init__.cpython-311.pyc
+vplanet/__pycache__/__init__.cpython-314.pyc
 vplanet/__pycache__/custom_units.cpython-311.pyc
+vplanet/__pycache__/custom_units.cpython-314.pyc
 vplanet/__pycache__/log.cpython-311.pyc
+vplanet/__pycache__/log.cpython-314.pyc
 vplanet/__pycache__/logger.cpython-311.pyc
+vplanet/__pycache__/logger.cpython-314.pyc
 vplanet/__pycache__/output.cpython-311.pyc
+vplanet/__pycache__/output.cpython-314.pyc
 vplanet/__pycache__/quantity.cpython-311.pyc
+vplanet/__pycache__/quantity.cpython-314.pyc
 vplanet/__pycache__/vplanet_help.cpython-311.pyc
 vplanet/__pycache__/wrapper.cpython-311.pyc
+vplanet/__pycache__/wrapper.cpython-314.pyc

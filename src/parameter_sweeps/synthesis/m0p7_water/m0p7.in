@@ -2,7 +2,7 @@
 sName star
 saModules stellar
 
-dMass 1.4e30 # Median mass of KV stellar host from NASA exoplanet catalog [kg].
+dMass 1.4e30
 dAge 5e7
 
 # STELLAR Parameters

@@ -244,10 +244,12 @@ def plot_thermal_evolution(save_name, planet_dynamics):
     
     axes[1].vlines([time_at_min], vmin, vmax, linestyles = '--', color = 'black', alpha = 0.75)
 
-    percent_mass_loss = 100 * (planet_dynamics['EnvelopeMass'][0] - planet_dynamics['EnvelopeMass'])/planet_dynamics['EnvelopeMass'][0]
+    percent_mass_loss = planet_dynamics['EnvelopeMass'][0] - planet_dynamics['EnvelopeMass'] # 100 * (planet_dynamics['EnvelopeMass'][0] - planet_dynamics['EnvelopeMass'])/planet_dynamics['EnvelopeMass'][0]
 
-    axes[2].plot(planet_dynamics['Time'], percent_mass_loss)
-    axes[2].set_ylabel('% Atmospheric Mass Loss', fontsize = 12)
+    mask = planet_dynamics['Time'] < 6e9
+
+    axes[2].plot(planet_dynamics['Time'][mask], percent_mass_loss[mask])
+    axes[2].set_ylabel('Atmospheric mass loss', fontsize = 12)
     axes[2].grid(True, alpha = 0.25)
     axes[2].xaxis.set_major_formatter(tck.FuncFormatter(lambda x, pos: x*1e-9))
     axes[2].set_xlabel('Time [Gyr]', fontsize = 12)
