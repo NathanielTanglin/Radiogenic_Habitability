@@ -11,10 +11,7 @@ dRotPeriod -1.0
 dEcc 0.0
 
 # From Koparapapu
-dSemi 0.9061
-
-# From Kane et al.
-# dSemi -0.931 # Semi major axis [AU]
+dSemi 0.8956
 
 # ThermInt inputs
 dTMan -1.0
