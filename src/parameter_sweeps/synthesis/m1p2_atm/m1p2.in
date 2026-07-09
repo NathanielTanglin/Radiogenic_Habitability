@@ -2,15 +2,15 @@
 sName star
 saModules stellar
 
-dMass 0.8e30
+dMass 2.4e30
 dAge 5e7
 
 # STELLAR Parameters
 sStellarModel baraffe
-bHaltEndBaraffeGrid 1 # Ends the simulation when the grid edge is reached.
-dSatXUVTime 3e8
-dXUVBeta 1.194
-dSatXUVFrac 2.218e-3 # Saturation level of the XUV luminosity.
-dSurfMagField 0.06008
+bHaltEndBaraffeGrid 0 # Ends the simulation when the grid edge is reached.
+dSatXUVTime 1e7
+dXUVBeta 1.25
+dSatXUVFrac 0.5012e-4 # Saturation level of the XUV luminosity.
+dSurfMagField 0.0002314
 
 saOutputOrder Time Age -Luminosity -LXUVStellar -Radius Temperature LXUVFrac

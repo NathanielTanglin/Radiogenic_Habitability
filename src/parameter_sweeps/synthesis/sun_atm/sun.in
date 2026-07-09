@@ -10,7 +10,7 @@ sStellarModel baraffe
 bHaltEndBaraffeGrid 1 # Ends the simulation when the grid edge is reached.
 dSatXUVTime 1e8
 dXUVBeta 1.23
-dSatXUVFrac 1.e-3 # Saturation level of the XUV luminosity.
+dSatXUVFrac 1e-3 # Saturation level of the XUV luminosity.
 dSurfMagField 0.0005
 
 saOutputOrder Time Age -Luminosity -LXUVStellar -Radius Temperature LXUVFrac

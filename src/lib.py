@@ -196,14 +196,19 @@ def get_param_pos(x, y, p):
 
 def plot_thermal_evolution(save_name, planet_dynamics):
     (fig, axes) = plt.subplots(3, 1, sharex = True)
-
     fig.set_size_inches(4, 10)
-    fig.subplots_adjust(hspace=0)
+    fig.subplots_adjust(hspace = 0)
 
-    axes[0].plot(planet_dynamics['Time'], planet_dynamics['40KNumCore'], label = '$^{40}$K (core)')
-    axes[0].plot(planet_dynamics['Time'], planet_dynamics['232ThNumMan'], label = '$^{232}$Th (mantle)')
-    axes[0].plot(planet_dynamics['Time'], planet_dynamics['235UNumMan'], label = '$^{235}$U (mantle)')
-    axes[0].plot(planet_dynamics['Time'], planet_dynamics['238UNumMan'], label = '$^{238}$U (mantle)')
+    time_yr = planet_dynamics['Time']
+    num_40K_core = planet_dynamics['40KNumCore']
+    num_232Th_man = planet_dynamics['232ThNumMan']
+    num_235U_man = planet_dynamics['235UNumMan']
+    num_238U_man = planet_dynamics['238UNumMan']
+
+    axes[0].plot(time_yr, num_40K_core, label = '$^{40}$K (core)')
+    axes[0].plot(time_yr, num_232Th_man, label = '$^{232}$Th (mantle)')
+    axes[0].plot(time_yr, num_235U_man, label = '$^{235}$U (mantle)')
+    axes[0].plot(time_yr, num_238U_man, label = '$^{238}$U (mantle)')
 
     (x_min, x_max) = axes[0].get_xlim()
     (y_min, y_max) = axes[0].get_ylim()
@@ -211,29 +216,29 @@ def plot_thermal_evolution(save_name, planet_dynamics):
     x_scale = x_max-x_min
     y_scale = y_max-y_min
 
-    (x, y) = get_param_pos(planet_dynamics['Time'], planet_dynamics['40KNumCore'], 0.1)
+    (x, y) = get_param_pos(time_yr, num_40K_core, 0.1)
     axes[0].text(x, y, '$^{40}$K (core)')
 
-    (x, y) = get_param_pos(planet_dynamics['Time'], planet_dynamics['232ThNumMan'], 0.1)
+    (x, y) = get_param_pos(time_yr, num_232Th_man, 0.1)
     axes[0].text(x, y + y_scale*0.01, '$^{232}$Th (mantle)')
 
-    (x, y) = get_param_pos(planet_dynamics['Time'], planet_dynamics['238UNumMan'], 0.2)
-    axes[0].text(x + x_scale*0.05, y, '$^{238}$U (mantle)')
-
-    (x, y) = get_param_pos(planet_dynamics['Time'], planet_dynamics['235UNumMan'], 0.2)
+    (x, y) = get_param_pos(time_yr, num_235U_man, 0.2)
     axes[0].text(x + x_scale*0.01, y, '$^{235}$U (mantle)')
 
-    axes[0].set_ylabel('Number of Atoms', fontsize = 12)
+    (x, y) = get_param_pos(time_yr, num_238U_man, 0.2)
+    axes[0].text(x + x_scale*0.05, y, '$^{238}$U (mantle)')
+
+    axes[0].set_ylabel('Number of atoms', fontsize = 12)
     axes[0].grid(True, alpha = 0.25)
     axes[0].xaxis.set_major_formatter(tck.FuncFormatter(lambda x, pos: x*1e-9))
     axes[0].set_yscale('log')
 
-    magmom = planet_dynamics['MagMom']
+    planet_dipole_moment_eunits = planet_dynamics['MagMom']
 
-    min_mag_moment_index = np.argmin(magmom)
-    time_at_min = planet_dynamics['Time'][min_mag_moment_index]
+    min_dipole_moment_index = np.argmin(planet_dipole_moment_eunits)
+    time_at_min_yr = time_yr[min_dipole_moment_index]
 
-    axes[1].plot(planet_dynamics['Time'], magmom, alpha = 0.7, color = 'purple')
+    axes[1].plot(time_yr, planet_dipole_moment_eunits, alpha = 0.7, color = 'purple')
     axes[1].xaxis.set_major_formatter(tck.FuncFormatter(lambda x, pos: x*1e-9))
     axes[1].set_ylabel('Magnetic Moment\n[Earth Magnetic Moments]', fontsize=12)
     axes[1].grid(True, alpha = 0.25)
@@ -242,14 +247,14 @@ def plot_thermal_evolution(save_name, planet_dynamics):
 
     (vmin, vmax) = axes[1].get_ylim()
     
-    axes[1].vlines([time_at_min], vmin, vmax, linestyles = '--', color = 'black', alpha = 0.75)
+    axes[1].vlines([time_at_min_yr], vmin, vmax, linestyles = '--', color = 'black', alpha = 0.75)
 
-    percent_mass_loss = planet_dynamics['EnvelopeMass'][0] - planet_dynamics['EnvelopeMass'] # 100 * (planet_dynamics['EnvelopeMass'][0] - planet_dynamics['EnvelopeMass'])/planet_dynamics['EnvelopeMass'][0]
+    atmospheric_mass_1e20_kg = planet_dynamics['EnvelopeMass']/1e20
 
-    mask = planet_dynamics['Time'] < 6e9
+    mask = time_yr < 6e9
 
-    axes[2].plot(planet_dynamics['Time'][mask], percent_mass_loss[mask])
-    axes[2].set_ylabel('Atmospheric mass loss', fontsize = 12)
+    axes[2].plot(time_yr[mask], atmospheric_mass_1e20_kg[mask])
+    axes[2].set_ylabel(r'Atmospheric mass [$\times 10^{20}$ kg]', fontsize = 12)
     axes[2].grid(True, alpha = 0.25)
     axes[2].xaxis.set_major_formatter(tck.FuncFormatter(lambda x, pos: x*1e-9))
     axes[2].set_xlabel('Time [Gyr]', fontsize = 12)
