@@ -2,15 +2,15 @@
 sName star
 saModules stellar
 
-dMass 1.72956e30 # Median mass of KV stellar host from NASA exoplanet catalog [kg]. (0.869598 solar masses)
+dMass 0.4e30
 dAge 5e7
 
 # STELLAR Parameters
 sStellarModel baraffe
-sMagBrakingModel matt
 bHaltEndBaraffeGrid 1 # Ends the simulation when the grid edge is reached.
-dSatXUVTime 1e8 # Jackson et al. (2012).
-dXUVBeta 1.221 # Ribas et al. (2005).
-dSatXUVFrac 1.203e-3 # Saturation level of the XUV luminosity.
+dSatXUVTime 1e9
+dXUVBeta 1.182
+dSatXUVFrac 2.624e-3 # Saturation level of the XUV luminosity.
+dSurfMagField 0.08582
 
 saOutputOrder Time Age -Luminosity -LXUVStellar -Radius Temperature LXUVFrac

@@ -8,8 +8,9 @@ dAge 5e7
 # STELLAR Parameters
 sStellarModel baraffe
 bHaltEndBaraffeGrid 1 # Ends the simulation when the grid edge is reached.
-dSatXUVTime 3e8 # Jackson et al. (2012).
-dXUVBeta 1.194 # Ribas et al. (2005).
+dSatXUVTime 3e8
+dXUVBeta 1.194
 dSatXUVFrac 2.218e-3 # Saturation level of the XUV luminosity.
+dSurfMagField 0.06008
 
 saOutputOrder Time Age -Luminosity -LXUVStellar -Radius Temperature LXUVFrac
