@@ -56,20 +56,20 @@ def add_parameter_sweep(stellar_host_label, hz_range):
     sweeps[atm_run_directory] = sweep_atm
     sweeps[water_run_directory] = sweep_water
 
-add_parameter_sweep("m1p2", (1.550, 2.733))
-add_parameter_sweep("m1p1", (1.287, 2.269))
-add_parameter_sweep("sun", (0.9553, 1.685))
-add_parameter_sweep("m0p9", (0.6995, 1.234))
-add_parameter_sweep("kv", (0.6076, 1.071))
-add_parameter_sweep("m0p8", (0.5103, 0.8999))
-add_parameter_sweep("m0p7", (0.3659, 0.6453))
-add_parameter_sweep("m0p6", (0.2568, 0.4529))
-add_parameter_sweep("m0p5", (0.1816, 0.3203))
-add_parameter_sweep("m0p4", (0.1341, 0.2365))
-add_parameter_sweep("m0p3", (0.09967, 0.1757))
-add_parameter_sweep("m0p2", (0.06620, 0.1167))
-add_parameter_sweep("m0p1", (0.02829, 0.04989))
-add_parameter_sweep("trappist", (0.02237, 0.03945))
+add_parameter_sweep("trappist", (0.024967375866069036, 0.050430828529552864))
+add_parameter_sweep("m0p1", (0.031060592538580522, 0.06229305781670558))
+add_parameter_sweep("m0p2", (0.07235421109392776, 0.1421672474441826))
+add_parameter_sweep("m0p3", (0.10877635393888095, 0.2121318467235588))
+add_parameter_sweep("m0p4", (0.14612964266104495, 0.28349597780127755))
+add_parameter_sweep("m0p5", (0.19761127501413284, 0.3802637544815201))
+add_parameter_sweep("m0p6", (0.2776971625930472, 0.5262273650739901))
+add_parameter_sweep("m0p7", (0.39124504606264093, 0.7254171525991292))
+add_parameter_sweep("m0p8", (0.5359642927048134, 0.9735022355856436))
+add_parameter_sweep("kv", (0.6401830775621882, 1.1510924277633037))
+add_parameter_sweep("m0p9", (0.7194908169548471, 1.2859924765981463))
+add_parameter_sweep("sun", (0.9627690052874481, 1.6998823971640933))
+add_parameter_sweep("m1p1", (1.2700977314900757, 2.2277696678863275))
+add_parameter_sweep("m1p2", (1.5146762666232594, 2.6475155997806903))
 
 def run_sweeps():
     for (sweep_dir, sweep_parameters) in sweeps.items():
