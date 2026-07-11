@@ -94,10 +94,10 @@ INNER = 1
 OUTER = 0
 
 # Bitwise flags
-ATM = 1
-WATER = 2
-DESSIC_TIME = 4
-PERCENT = 8
+ATM = 0b1
+WATER = 0b10
+DESSIC_TIME = 0b100
+PERCENT = 0b1000
 
 def build_contour_VPLanet(save_name = '', directory = 'Parameter_Sweep', planet_file_name = 'planet.in', mode = ATM):
     print('Plotting parameter sweep data from directory {}'.format(directory))
@@ -141,23 +141,36 @@ def build_contour_VPLanet(save_name = '', directory = 'Parameter_Sweep', planet_
 
         time = planet_dynamics['Time']
 
-        # Cuts off the mass loss at 6.025 Gyr.
+        initial_mass = mass.iloc[0]
+
+        if mass_type == "EnvelopeMass":
+            initial_mass = round(initial_mass/1e20, 2)
+        else:
+            initial_mass = round(initial_mass, 1)
 
         if (mode & DESSIC_TIME):
             # Gets the first time snap shot where the mass is gone (equal to zero).
             metric = round(time[mass == 0.0].iloc[0] / 1e9, 2)
-            unit_label = 'Time Until Ocean Evaporated [Gyr]' if mass_type == 'SurfWaterMass' else 'Time Until Atmosphere Lost [Gyr]'
+            unit_label = 'Time until ocean evaporated [Gyr] for initial surface water of {init_mass} T.O.'.format(init_mass = initial_mass) if mass_type == 'SurfWaterMass' else r"Time until atmosphere lost [Gyr] for initial envelope of $" + str(initial_mass) + r"\times 10^{20}$ kg"
         elif (mode & PERCENT):
-            metric = 100.0 * (mass.iloc[0] - mass[time <= 6.025300e9].iloc[-1]) / mass.iloc[0]
-            unit_label = '% Water Loss' if mass_type == 'SurfWaterMass' else '% Atmospheric Mass Loss'
+            metric = 100.0 * (mass.iloc[0] - mass[time <= 6e9].iloc[-1]) / mass.iloc[0]
+            unit_label = 'Water loss [%] for initial surface water of {init_mass} T.O.'.format(init_mass = initial_mass) if mass_type == 'SurfWaterMass' else r"Atmospheric mass loss [%] for initial envelope of $" + str(initial_mass) + r"\times 10^{20}$ kg"
         else: # Just mass loss.
-            metric = mass.iloc[0] - mass[time <= 6.025300e9].iloc[-1]
-            unit_label = 'Water Loss [TO]' if mass_type == 'SurfWaterMass' else 'Atmospheric Mass Loss [kg]' 
+            metric = (mass.iloc[0] - mass[time <= 6e9].iloc[-1])
+
+            if mass_type == "EnvelopeMass":
+                initial_mass = round(initial_mass, 2)/1e20
+            else:
+                initial_mass = round(initial_mass, 2)
+
+            unit_label = 'Water loss [T.O.] for initial surface water of {init_mass} T.O.'.format(init_mass = initial_mass) if mass_type == 'SurfWaterMass' else r"Atmospheric mass Loss [$\times 10^{20}$ kg] for initial envelope of $" + str(initial_mass) + r"\times 10^{20}$ kg"
 
         # Row -> K, column -> Th, U
         x[row][column] = initial_40K
         y[row][column] = initial_232Th
         z[row][column] = metric
+
+        break
 
     print('Building plot...'.format(i+1))
 
