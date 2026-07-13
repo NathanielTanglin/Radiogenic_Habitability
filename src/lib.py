@@ -47,7 +47,7 @@ def solar_planet(planet_dynamics, stellar_dynamics, semi_major_axis):
 
 def M_dwarf_planet(planet_dynamics, stellar_dynamics, semi_major_axis):
     #semi_major_axis = 2.89308763e9 # In meters.
-    
+
     #7.08658848e9 # In meters. # 1.49598 * 1e11 # In meters.
     M_dwarf_mean_surface_B = (1.5*1e3) * 1e-4 # In Tesla.
     R_EARTH = 6.371 * 1e6 # In SI base units.
@@ -99,7 +99,7 @@ WATER = 0b10
 DESSIC_TIME = 0b100
 PERCENT = 0b1000
 
-def build_contour_VPLanet(save_name = '', directory = 'Parameter_Sweep', planet_file_name = 'planet.in', mode = ATM):
+def build_contour_VPLanet(save_name = '', directory, planet_file_name, mode = ATM):
     print('Plotting parameter sweep data from directory {}'.format(directory))
 
     x = np.zeros((30, 30))
@@ -131,7 +131,7 @@ def build_contour_VPLanet(save_name = '', directory = 'Parameter_Sweep', planet_
             WATER: 'SurfWaterMass',
             ATM: 'EnvelopeMass'
         }[(mode & WATER) | (mode & ATM)]
-        
+
         mass = planet_dynamics[mass_type]
 
         metric = 0.0
@@ -159,9 +159,7 @@ def build_contour_VPLanet(save_name = '', directory = 'Parameter_Sweep', planet_
             metric = (mass.iloc[0] - mass[time <= 6e9].iloc[-1])
 
             if mass_type == "EnvelopeMass":
-                initial_mass = round(initial_mass, 2)/1e20
-            else:
-                initial_mass = round(initial_mass, 2)
+                metric = metric/1e20
 
             unit_label = 'Water loss [T.O.] for initial surface water of {init_mass} T.O.'.format(init_mass = initial_mass) if mass_type == 'SurfWaterMass' else r"Atmospheric mass Loss [$\times 10^{20}$ kg] for initial envelope of $" + str(initial_mass) + r"\times 10^{20}$ kg"
 
@@ -169,8 +167,6 @@ def build_contour_VPLanet(save_name = '', directory = 'Parameter_Sweep', planet_
         x[row][column] = initial_40K
         y[row][column] = initial_232Th
         z[row][column] = metric
-
-        break
 
     print('Building plot...'.format(i+1))
 
@@ -190,7 +186,14 @@ def build_contour_VPLanet(save_name = '', directory = 'Parameter_Sweep', planet_
     axis.text(0.9, 1.2, "Earth", fontsize = 12, color = 'red')
 
     cbar = fig.colorbar(mappable=im, label=unit_label, orientation = 'horizontal', location = 'top')
-    cbar.ax.xaxis.set_major_formatter(tck.FuncFormatter(lambda x,pos: '{}'.format(round(x, 2))))
+    cbar.ax.xaxis.set_major_formatter(tck.FuncFormatter(lambda x,pos: '{}'.format(round(x, 4))))
+
+    if not ("trappist" in directory and mode & ATM):
+        (min_loss, max_loss) = (np.min(z), np.max(z))
+
+        ticks = np.linspace(min_loss, max_loss, 2) if (min_loss - max_loss) < 0.001 else np.linspace(min_loss, max_loss, 10)
+
+        cbar.ax.xaxis.set_major_locator(tck.FixedLocator(ticks))
 
     interp = sci.RegularGridInterpolator((x.T[0], y[0]), z)((1, 1))
 
@@ -198,7 +201,7 @@ def build_contour_VPLanet(save_name = '', directory = 'Parameter_Sweep', planet_
 
     if save_name != '':
         fig.savefig(save_name, dpi = 300, bbox_inches = 'tight')
-    
+
     print('Plot built!')
 
 def get_param_pos(x, y, p):
